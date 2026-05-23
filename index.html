@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Weather Station</title>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  <style>
+    body{
+      font-family: Arial;
+      background:#0f172a;
+      color:white;
+      text-align:center;
+      padding-top:40px;
+    }
+
+    .card{
+      background:#1e293b;
+      width:300px;
+      margin:auto;
+      padding:20px;
+      border-radius:15px;
+    }
+
+    h1{
+      color:#38bdf8;
+    }
+
+    p{
+      font-size:22px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Smart Weather Station</h1>
+
+<p>🌡 Temp: <span id="temp">--</span> °C</p>
+
+<p>💧 Humidity: <span id="hum">--</span> %</p>
+
+<p>🌪 Pressure: <span id="press">--</span> hPa</p>
+
+<p>🌫 Air: <span id="air">--</span></p>
+
+</div>
+
+<script>
+
+const firebaseConfig = {
+  databaseURL: "https://pjweather-987bf-default-rtdb.europe-west1.firebasedatabase.app"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+db.ref("Live_Weather").on("value", (snapshot) => {
+
+  const data = snapshot.val();
+
+  document.getElementById("temp").innerHTML = data.Temperature;
+  document.getElementById("hum").innerHTML = data.Humidity;
+  document.getElementById("press").innerHTML = data.Pressure;
+  document.getElementById("air").innerHTML = data.AirQuality;
+
+});
+
+</script>
+
+</body>
+</html>
