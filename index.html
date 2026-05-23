@@ -67,6 +67,40 @@ db.ref("Live_Weather").on("value", (snapshot) => {
   document.getElementById("hum").innerHTML = data.Humidity;
   document.getElementById("press").innerHTML = data.Pressure;
   document.getElementById("air").innerHTML = data.AirQuality;
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
+
+const firebaseConfig = {
+  databaseURL: "https://pjweather-987bf-default-rtdb.europe-west1.firebasedatabase.app"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+db.ref("Live_Weather").on("value", function(snapshot) {
+
+  const data = snapshot.val();
+
+  console.log(data);
+
+  document.getElementById("temp").innerHTML =
+    data.Temperature ?? "--";
+
+  document.getElementById("hum").innerHTML =
+    data.Humidity ?? "--";
+
+  document.getElementById("press").innerHTML =
+    data.Pressure ?? "--";
+
+  document.getElementById("air").innerHTML =
+    data.AirQuality ?? "--";
+
+});
+
+</script>
 
 });
 
